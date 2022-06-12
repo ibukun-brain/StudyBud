@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}StudyBuddy - Find study partners around the world!{% endblock title %}
+
+{% block content %}
+<main class="layout layout--3">
+    <div class="container">
+
+        {% include 'partials/topics_component.html' %}
+
+        {% include 'partials/feed_component.html' %}
+
+        {% include 'partials/activities_component.html' %}
+
+    </div>
+  </main>
+{% endblock content %}

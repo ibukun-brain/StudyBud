@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% comment %} <link rel="stylesheet" href="{% static 'css/sweetalert2.css' %}" /> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/sweetalert2.min.css' %}" />
+
+    <title>{% block title %}{% endblock title %}| StuddyBuddy</title>
+  </head>
+<style>
+  {% if request.user.is_authenticated %}
+  {% endif %}
+</style>
+  <body>
+
+    {% include 'partials/navbar.html' %}
+    {% block content %}
+    
+    {% endblock content%}
+
+
+        <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/htmx.min.js' %}"></script>
+        <script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
+        {% comment %} <script src="{% static 'js/sweetalert2.min.js' %}" defer></script> {% endcomment %}
+        {% comment %} <script src="{% static 'js/sweetalert2.js' %}" defer></script> {% endcomment %}
+        {% comment %} <script src="{% static 'js/sweetalert2.all.js' %}" defer></script> {% endcomment %}
+
+        {% block scripts %}{% endblock scripts %}
+
+        <script type="text/javascript">
+          document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+          })      
+          {% comment %} const error = document.getElementById('error') {% endcomment %}
+          setTimeout(function() {
+            $('#error').fadeOut('slow');
+          }, 3000);
+          setTimeout(function() {
+            $('.errorlist li').fadeOut('slow');
+          }, 3000);
+          
+        </script>  
+      </body>
+</html>
